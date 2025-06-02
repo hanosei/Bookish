@@ -1,0 +1,10 @@
+@model List<Bookish.Models.Book>
+@{
+    ViewData["Title"] = "Catalogue";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Bookish Catalogue</h1>
+    @foreach (var book in Model)
+    @book.Title
+</div>
