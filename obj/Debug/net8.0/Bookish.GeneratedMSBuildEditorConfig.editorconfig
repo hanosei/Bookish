@@ -26,6 +26,14 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\HanOse\Training\Bookish
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/HanOse/Training/Bookish/Views/BookInventory/Add.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va0ludmVudG9yeVxBZGQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/HanOse/Training/Bookish/Views/BookInventory/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va0ludmVudG9yeVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/HanOse/Training/Bookish/Views/Books/Catalogue.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va3NcQ2F0YWxvZ3VlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

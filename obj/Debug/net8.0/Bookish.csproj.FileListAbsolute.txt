@@ -132,3 +132,4 @@ C:\Users\HanOse\Training\Bookish\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis
 C:\Users\HanOse\Training\Bookish\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
 C:\Users\HanOse\Training\Bookish\obj\Debug\net8.0\Bookish.csproj.AssemblyReference.cache
 C:\Users\HanOse\Training\Bookish\obj\Debug\net8.0\Bookish.csproj.Up2Date
+C:\Users\HanOse\Training\Bookish\obj\Debug\net8.0\Bookish.sourcelink.json

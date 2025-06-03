@@ -1,0 +1,23 @@
+@model Bookish.ViewModels.BookInventoryViewModel;
+
+@{
+    ViewData["Title"] = "Add New Book";
+}
+
+<h1>Add New Book</h1>
+
+<form asp-action="Add" method="post">
+    <div class="mb-3">
+    <label asp-for="Title"></label>
+    <input asp-for="Title">
+    </div>
+    <div class="mb-3">
+    <label asp-for="Author"></label>
+    <input asp-for="Author">
+    </div>
+    <div class="mb-3">
+    <label asp-for="TotalCopies"></label>
+    <input asp-for="TotalCopies">
+    </div>
+    <button type="submit" class="=btn btn-primary">Save Book</button>
+</form>

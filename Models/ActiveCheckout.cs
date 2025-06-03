@@ -1,8 +1,8 @@
 namespace Bookish.Models
 {
-    public class ActiveCheckouts
+    public class ActiveCheckout
     {
-        public int ActiveCheckoutsId { get; set; }
+        public int ActiveCheckoutId { get; set; }
 
         public int BookId { get; set; } 
         public Book Book { get; set; } 

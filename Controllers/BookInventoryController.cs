@@ -1,0 +1,123 @@
+using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
+using Bookish.Models;
+using Microsoft.AspNetCore.Components.Web;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
+using Bookish.ViewModels;
+using Microsoft.EntityFrameworkCore;
+
+namespace Bookish.Controllers {
+
+    [Route("BookInventory")]
+    public class BookInventoryController : Controller 
+    {
+        private readonly BookishContext _context;
+
+        public BookInventoryController(BookishContext context)
+        {
+            _context = context;
+        }
+
+
+        [HttpGet("Index")]
+        public IActionResult Index()
+        {
+            var books = from BookInventory in _context.BookInventories
+                        join Book in _context.Books
+                        on BookInventory.BookId equals Book.BookId
+                        select new BookInventoryViewModel
+                        {
+                            BookId = Book.BookId,
+                            Title = Book.Title,
+                            Author = Book.Author,
+                            AvailableCopies = BookInventory.AvailableCopies,
+                            TotalCopies = BookInventory.TotalCopies,
+                        };
+            return View(books.ToList());
+        }
+
+        [HttpGet("Add")]
+        public IActionResult Add()
+        {
+            return View();
+        }
+
+        [HttpPost("Add")]
+        public IActionResult Add(BookInventoryViewModel bookInventoryViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var book = new Book
+                {
+                    Title = bookInventoryViewModel.Title,
+                    Author = bookInventoryViewModel.Author
+                };
+
+                _context.Books.Add(book);
+
+                 var inventory = new BookInventory
+                {
+                    AvailableCopies = bookInventoryViewModel.AvailableCopies,
+                    TotalCopies = bookInventoryViewModel.TotalCopies
+                };
+
+                _context.BookInventories.Add(inventory);
+                _context.SaveChanges();
+            }
+
+            return ModelState.IsValid ? RedirectToPage("Index") : View(bookInventoryViewModel);
+        }
+
+        [HttpGet("Edit")]
+        public IActionResult Edit(int BookId)
+        {
+            var book = _context.Books.Find(BookId);
+            var inventory = _context.BookInventories.Find(BookId);
+
+            if (book == null || inventory == null)
+            {
+                return BadRequest();
+            }
+
+            var model = new BookInventoryViewModel
+            {
+                BookId = book.BookId,
+                Title = book.Title,
+                Author = book.Author,
+                AvailableCopies = inventory.AvailableCopies,
+                TotalCopies = inventory.TotalCopies
+            };
+            
+            return View(model);
+        }
+
+        [HttpPut("Edit")]
+        public IActionResult Edit(BookInventoryViewModel model)
+        {
+            var bookId = model.BookId;
+            var book = _context.Books.Find(bookId);
+            var inventory = _context.BookInventories.Find(bookId);
+
+            if (ModelState.IsValid) 
+            {
+                book.Title = model.Title;
+                book.Author = model.Author;
+                inventory.AvailableCopies = model.AvailableCopies;
+                inventory.TotalCopies = model.TotalCopies;
+                _context.SaveChanges();
+            }
+
+            return RedirectToPage("Index");
+            
+        }
+
+
+
+
+         
+
+    }
+
+
+
+}
