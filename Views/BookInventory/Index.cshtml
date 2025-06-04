@@ -20,6 +20,7 @@
                 <th>Available Copies</th>
                 <th>Total Copies</th>
                 <th>Edit</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -31,6 +32,7 @@
                     <td>@book.AvailableCopies</td>
                     <td>@book.TotalCopies</td>
                     <td><a asp-action="Edit" asp-route-BookId=@book.BookId>Edit Book</a></td>
+                    <td><form asp-controller="BookInventory" asp-action="Delete" method="post" asp-route-BookId=@book.BookId><button type="submit" class="btn btn-danger btn-sm">Delete</button></form></td>
                 </tr>
             }
         </tbody> 

@@ -118,5 +118,24 @@ namespace Bookish.Controllers {
             }
             return View(model);
         }
+
+        [HttpPost("Delete")]
+        public IActionResult Delete(int BookId)
+        {
+            var book = _context.Books.SingleOrDefault(book => book.BookId == BookId);
+            var inventory = _context.BookInventories.SingleOrDefault(book => book.BookId == BookId);
+
+            if (book == null || inventory == null)
+            {
+                return BadRequest();
+            }
+
+            _context.BookInventories.Remove(inventory);
+            _context.Books.Remove(book);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
     };
 };
