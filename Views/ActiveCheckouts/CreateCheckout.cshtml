@@ -1,0 +1,48 @@
+@model Bookish.ViewModels.ActiveCheckoutViewModel;
+
+@{
+    ViewData["Title"] = "CreateCheckout";
+}
+<h2>Create Checkout</h2>
+
+<div class="d-flex justify-content">
+    <form asp-action="CreateCheckout" method="post">
+        <input type="hidden" asp-for="BookId" />
+
+        <div class="form-group mb_3">
+            <label asp-for="Title"></label>
+            <input asp-for="Title" class="form-control" readonly />
+        </div>
+
+        <div class="form-group mb_3">
+            <label asp-for="Member"></label>
+            <select asp-for="MemberId" asp-items="@(new SelectList(Model.Member, "MemberId", "Name"))" class="form-control"></select>
+            <span asp-validation-for="MemberId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb_3">
+            <label asp-for="DueInDate"></label>
+            <input asp-for="DueInDate" type="date" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Checkout Book</button>
+    </form>
+</div>
+
+
+@* <h2>Debug check</h2>
+
+@if (Model == null) {
+    <p>Model is null</p>
+}
+else{
+    <p>Model is not null</p>
+    <p> BookId: @Model.BookId</p>
+    <p> Title: @Model.Title</p>
+
+    if (Model.Member == null){
+        <p> Member is null</p>
+    } else {
+        <p>Model.Member count: @Model.Member.Count</p>
+    }
+} *@

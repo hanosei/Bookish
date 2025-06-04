@@ -19,12 +19,11 @@ namespace Bookish.Controllers
             _context = context;
         }
 
-        [HttpGet("CreateCheckOut")]
+        [HttpGet("CreateCheckout")]
         public IActionResult CreateCheckOut(int BookId)
         {
-            var book = _context.Books.SingleOrDefault(book => book.BookId == book.BookId); //To Fix (error:sequence contains more than one element)
+            var book = _context.Books.SingleOrDefault(book => book.BookId == BookId);
             if (book == null) return NotFound();
-            //if(book.BookInventory.AvailableCopies <=0)
 
            var model = new ActiveCheckoutViewModel
                 {
@@ -34,29 +33,43 @@ namespace Bookish.Controllers
                     DueInDate = DateTime.UtcNow.AddMonths(1)
                 };
                 
-            return View();
+            return View(model);
         }
 
-        [HttpPost("CreateCheckOut")]
+        [HttpPost("CreateCheckout")]
         public IActionResult CreateCheckout(ActiveCheckoutViewModel model)
         {
             if (ModelState.IsValid)
             {
-                // Needs member to be entered and verified with database 
-                // Active check: Book Id, Member Id, Due In Date
                 var checkout = new ActiveCheckout
                 {
                     BookId = model.BookId,
                     MemberId = model.MemberId,
-                    DueInDate = model.DueInDate
+                    DueInDate = model.DueInDate.ToUniversalTime()
                 };
 
                 _context.ActiveCheckouts.Add(checkout);
-                _context.SaveChanges();
-            };
-            
 
-            return View();
+                var checkedBookInventory = _context.BookInventories.SingleOrDefault(book => book.BookId == model.BookId);
+                if (checkedBookInventory != null && checkedBookInventory.AvailableCopies > 0)
+                {
+                    checkedBookInventory.AvailableCopies -= 1;
+                    _context.SaveChanges();
+                }
+                else
+                {
+                    ModelState.AddModelError("", "No available copies to check out");
+                    model.Member = _context.Members.ToList();
+                    return View(model);
+                }
+                ;
+
+                _context.SaveChanges();
+                return RedirectToAction("Index", "BookInventory");
+            }
+
+            model.Member = _context.Members.ToList();
+            return View(model);
         }
     }
 }

@@ -19,6 +19,7 @@
                 <th>Mobile</th>
                 <th>Date Joined</th>
                 <th>Edit Details</th>
+                <th>View Checkouts</th>
                 <th>Delete Member</th>
             </tr>
         </thead>
@@ -30,7 +31,8 @@
                     <td>@member.Email</td>
                     <td>@member.Mobile</td>
                     <td>@member.DateJoined.ToShortDateString()</td>
-                    <td><a asp-action="Edit" asp-route-MemberId=@member.MemberId>Edit</a></td>
+                    <td><a asp-action="Edit" asp-route-MemberId=@member.MemberId class="btn btn-primary">Edit</a></td>
+                    <td>Button to view active checkouts</td>
                     <td><form asp-controller="Members" asp-action="Delete" method="post" asp-route-MemberId=@member.MemberId><button type="submit" class="btn btn-danger btn-sm">Delete</button></form></td>
                 </tr>
             }
@@ -45,5 +47,5 @@
     @if (member.ActiveCheckouts.Any()){
         
     } *@
-  } -->
+ 
 

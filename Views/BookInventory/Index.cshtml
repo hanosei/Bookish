@@ -8,6 +8,10 @@
 <h1>Book Catalogue</h1>
 <div class="mb-3">
 <!-- <button asp-controller="BooksInventory" asp-action="Add" type="button" class="btn btn-primary">Add Book</button> -->
+<form asp-asp-controller="BookInventory" asp-action="Index" method="get" class=" mb-4 d-flex justify-content-center">
+    <input type="text" name="search" class="form-control w-50 me-2" placeholder="Search by Title or Author"/>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
 <a asp-controller="BookInventory" asp-action="Add" class="btn btn-primary">Add New Book</a>
 </div>
 
@@ -19,6 +23,7 @@
                 <th>Author</th>
                 <th>Available Copies</th>
                 <th>Total Copies</th>
+                <th>CheckOut Book</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
@@ -31,8 +36,8 @@
                     <td>@book.Author</td>
                     <td>@book.AvailableCopies</td>
                     <td>@book.TotalCopies</td>
-                    <td><a asp-controller="ActiveCheckouts" asp-action="CreateCheckOut" asp-route-BookId=@book.BookId>Create Check Out</a></td>
-                    <td><a asp-action="Edit" asp-route-BookId=@book.BookId>Edit Book</a></td>
+                    <td><a asp-controller="ActiveCheckouts" asp-action="CreateCheckout" asp-route-BookId=@book.BookId class="btn btn-primary">Checkout</a></td>
+                    <td><a asp-action="Edit" asp-route-BookId=@book.BookId class="btn btn-primary">Edit Book</a></td>
                     <td><form asp-controller="BookInventory" asp-action="Delete" method="post" asp-route-BookId=@book.BookId><button type="submit" class="btn btn-danger btn-sm">Delete</button></form></td>
                 </tr>
             }

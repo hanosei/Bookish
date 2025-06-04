@@ -20,7 +20,7 @@ namespace Bookish.Controllers {
 
 
         [HttpGet("Index")]
-        public IActionResult Index()
+        public IActionResult Index(string search)
         {
             var books = from BookInventory in _context.BookInventories
                         join Book in _context.Books
@@ -33,6 +33,11 @@ namespace Bookish.Controllers {
                             AvailableCopies = BookInventory.AvailableCopies,
                             TotalCopies = BookInventory.TotalCopies,
                         };
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                books = books.Where(books => books.Title.Contains(search) || books.Author.Contains(search));
+            }
             return View(books.ToList());
         }
 

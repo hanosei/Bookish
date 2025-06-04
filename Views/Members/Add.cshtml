@@ -5,23 +5,30 @@
 }
 <div class="mb-3">
 <h1>Add New Member</h1>
-</div>
+
+<div class="d-flex justify-content">
 <form asp-action="Add" method="post">
-    <div class="mb-3">
-    <label asp-for="Name"></label>
-    <input asp-for="Name">
+
+    <div class="form-group mb_3">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control">
     </div>
-    <div class="mb-3">
-    <label asp-for="Email"></label>
-    <input asp-for="Email">
+
+    <div class="form-group mb_3">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control">
     </div>
-    <div class="mb-3">
-    <label asp-for="Mobile"></label>
-    <input asp-for="Mobile">
+
+    <div class="form-group mb_3">
+        <label asp-for="Mobile"></label>
+        <input asp-for="Mobile" class="form-control">
     </div>
-    <div class="mb-3"></div>
-    <label asp-for="DateJoined"></label>
-    <input asp-for="DateJoined">
+
+    <div class="form-group mb_3">
+        <label asp-for="DateJoined"></label>
+        <input asp-for="DateJoined" class="form-control">
     </div>
+
     <button type="submit" class="=btn btn-primary">Save Member</button>
 </form>
+</div>
