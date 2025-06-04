@@ -10,13 +10,29 @@
 <!-- <button asp-controller="BooksInventory" asp-action="Add" type="button" class="btn btn-primary">Add Book</button> -->
 <a asp-controller="BookInventory" asp-action="Add" class="btn btn-primary">Add New Book</a>
 
-@foreach (var book in Model)
-{
+
     <div>
-    <p>Book Title: @book.Title</p>
-    <p>Author: @book.Author</p>
-    <p>Available Copies: @book.AvailableCopies</p>
-    <p>Total Copies: @book.TotalCopies</p>
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Available Copies</th>
+                <th>Total Copies</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model)
+            {
+                <tr>
+                    <td>@book.Title</td>
+                    <td>@book.Author</td>
+                    <td>@book.AvailableCopies</td>
+                    <td>@book.TotalCopies</td>
+                </tr>
+            }
+        </tbody> 
+    </table>
     </div>
-}
+  
 

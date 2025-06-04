@@ -54,10 +54,14 @@ namespace Bookish.Controllers {
                 };
 
                 _context.Books.Add(book);
+                _context.SaveChanges();
+
+            // var book = _context.Books.Find(BookId);
 
                  var inventory = new BookInventory
                 {
-                    AvailableCopies = bookInventoryViewModel.AvailableCopies,
+                    BookId = book.BookId,
+                    AvailableCopies = bookInventoryViewModel.TotalCopies,
                     TotalCopies = bookInventoryViewModel.TotalCopies
                 };
 
@@ -65,7 +69,7 @@ namespace Bookish.Controllers {
                 _context.SaveChanges();
             }
 
-            return ModelState.IsValid ? RedirectToPage("Index") : View(bookInventoryViewModel);
+            return ModelState.IsValid ? RedirectToAction("Index") : View(bookInventoryViewModel);
         }
 
         [HttpGet("Edit")]
