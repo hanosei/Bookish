@@ -7,11 +7,12 @@
 <h1>Book Catalogue</h1>
 <div class="mb-3">
 <!-- <button asp-controller="BooksInventory" asp-action="Add" type="button" class="btn btn-primary">Add Book</button> -->
-<form asp-asp-controller="BookInventory" asp-action="Index" method="get" class=" mb-4 d-flex justify-content-center">
-    <input type="text" name="search" class="form-control w-50 me-2" placeholder="Search by Title or Author"/>
+<a asp-controller="BookInventory" asp-action="Add" class="btn btn-primary mb-3">Add New Book</a>
+<form asp-asp-controller="BookInventory" asp-action="Index" method="get" class=" mb-3 d-flex">
+    <input type="text" name="search" class="form-control w-80 me-2" placeholder="Search by Title or Author"/>
     <button type="submit" class="btn btn-primary">Search</button>
 </form>
-<a asp-controller="BookInventory" asp-action="Add" class="btn btn-primary">Add New Book</a>
+
 </div>
 
     <div>
