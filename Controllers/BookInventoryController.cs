@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Bookish.Controllers {
 
     [Route("BookInventory")]
-    public class BookInventoryController : Controller 
+    public class BookInventoryController : Controller
     {
         private readonly BookishContext _context;
 
@@ -56,9 +56,9 @@ namespace Bookish.Controllers {
                 _context.Books.Add(book);
                 _context.SaveChanges();
 
-            // var book = _context.Books.Find(BookId);
+                // var book = _context.Books.Find(BookId);
 
-                 var inventory = new BookInventory
+                var inventory = new BookInventory
                 {
                     BookId = book.BookId,
                     AvailableCopies = bookInventoryViewModel.TotalCopies,
@@ -75,8 +75,8 @@ namespace Bookish.Controllers {
         [HttpGet("Edit")]
         public IActionResult Edit(int BookId)
         {
-            var book = _context.Books.Find(BookId);
-            var inventory = _context.BookInventories.Find(BookId);
+            var book = _context.Books.SingleOrDefault(book => book.BookId == BookId);
+            var inventory = _context.BookInventories.SingleOrDefault(book => book.BookId == BookId);
 
             if (book == null || inventory == null)
             {
@@ -91,37 +91,32 @@ namespace Bookish.Controllers {
                 AvailableCopies = inventory.AvailableCopies,
                 TotalCopies = inventory.TotalCopies
             };
-            
+
             return View(model);
         }
 
-        [HttpPut("Edit")]
+        [HttpPost("Edit")]
         public IActionResult Edit(BookInventoryViewModel model)
         {
-            var bookId = model.BookId;
-            var book = _context.Books.Find(bookId);
-            var inventory = _context.BookInventories.Find(bookId);
-
-            if (ModelState.IsValid) 
+            if (ModelState.IsValid)
             {
+
+                var book = _context.Books.SingleOrDefault(book => book.BookId == model.BookId);
+                var inventory = _context.BookInventories.SingleOrDefault(book => book.BookId == model.BookId);
+
+                if (book == null || inventory == null)
+                {
+                    return NotFound();
+                }
+
                 book.Title = model.Title;
                 book.Author = model.Author;
                 inventory.AvailableCopies = model.AvailableCopies;
                 inventory.TotalCopies = model.TotalCopies;
                 _context.SaveChanges();
+                return RedirectToAction("Index");
             }
-
-            return RedirectToPage("Index");
-            
+            return View(model);
         }
-
-
-
-
-         
-
-    }
-
-
-
-}
+    };
+};

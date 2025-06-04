@@ -19,6 +19,7 @@
                 <th>Author</th>
                 <th>Available Copies</th>
                 <th>Total Copies</th>
+                <th>Edit</th>
             </tr>
         </thead>
         <tbody>
@@ -29,6 +30,7 @@
                     <td>@book.Author</td>
                     <td>@book.AvailableCopies</td>
                     <td>@book.TotalCopies</td>
+                    <td><a asp-action="Edit" asp-route-BookId=@book.BookId>Edit Book</a></td>
                 </tr>
             }
         </tbody> 

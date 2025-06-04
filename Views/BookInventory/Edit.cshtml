@@ -1,0 +1,29 @@
+@model Bookish.ViewModels.BookInventoryViewModel;
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit Book</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="BookId">
+
+    <div class="mb-3">
+    <label asp-for="Title"></label>
+    <input asp-for="Title">
+    </div>
+    <div class="mb-3">
+    <label asp-for="Author"></label>
+    <input asp-for="Author">
+    </div>
+    <div class="mb-3"></div>
+    <label asp-for="AvailableCopies"></label>
+    <input asp-for="AvailableCopies">
+    </div>
+    <div class="mb-3">
+    <label asp-for="TotalCopies"></label>
+    <input asp-for="TotalCopies">
+    </div>
+    <button type="submit" class="=btn btn-primary">Save Edits</button>
+</form>
