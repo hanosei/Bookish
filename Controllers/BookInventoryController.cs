@@ -38,6 +38,7 @@ namespace Bookish.Controllers {
             {
                 books = books.Where(books => books.Title.Contains(search) || books.Author.Contains(search));
             }
+            
             return View(books.ToList());
         }
 
