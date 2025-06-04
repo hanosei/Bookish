@@ -1,0 +1,29 @@
+@model Bookish.Models.Member;
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit Member</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="MemberId">
+
+    <div class="mb-3">
+    <label asp-for="Name"></label>
+    <input asp-for="Name">
+    </div>
+    <div class="mb-3">
+    <label asp-for="Email"></label>
+    <input asp-for="Email">
+    </div>
+    <div class="mb-3"></div>
+    <label asp-for="Mobile"></label>
+    <input asp-for="Mobile">
+    </div>
+    <div class="mb-3">
+    <label asp-for="DateJoined"></label>
+    <input asp-for="DateJoined">
+    </div>
+    <button type="submit" class="=btn btn-primary">Save Edits</button>
+</form>

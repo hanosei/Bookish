@@ -1,0 +1,49 @@
+@model List<Bookish.Models.Member>;
+
+@{
+    ViewData["Title"] = "Library Members";
+}
+
+
+<h1>Library Members</h1>
+<div class="mb-3">
+<a asp-controller="Members" asp-action="Add" class="btn btn-primary">Add New Member</a>
+</div>
+
+    <div>
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Date Joined</th>
+                <th>Edit Details</th>
+                <th>Delete Member</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var member in Model)
+            {
+                <tr>
+                    <td>@member.Name</td>
+                    <td>@member.Email</td>
+                    <td>@member.Mobile</td>
+                    <td>@member.DateJoined.ToShortDateString()</td>
+                    <td><a asp-action="Edit" asp-route-MemberId=@member.MemberId>Edit</a></td>
+                    <td><form asp-controller="Members" asp-action="Delete" method="post" asp-route-MemberId=@member.MemberId><button type="submit" class="btn btn-danger btn-sm">Delete</button></form></td>
+                </tr>
+            }
+        </tbody> 
+    </table>
+    </div>
+  
+  @* <!-- @foreach (var member in Model)
+  {
+    @member.Name
+    <p> Checked out books:></p>
+    @if (member.ActiveCheckouts.Any()){
+        
+    } *@
+  } -->
+

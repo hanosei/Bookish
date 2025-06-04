@@ -6,6 +6,6 @@ namespace Bookish.Models
         public string Name {get; set; }
         public string Email {get; set; }
         public int Mobile {get; set; }
-        public DateTime DateJoined {get; set;}
+        public DateTime DateJoined { get; set; } = DateTime.UtcNow;
     }
 }
