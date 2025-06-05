@@ -1,4 +1,4 @@
-@model List<Bookish.Models.Member>;
+@model List<Bookish.ViewModels.MemberWithActiveCheckoutsViewModel>;
 
 @{
     ViewData["Title"] = "Library Members";
@@ -24,16 +24,25 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var member in Model)
-            {
+        @foreach (var MemberWithActiveCheckouts in Model)
+        {
                 <tr>
-                    <td>@member.Name</td>
-                    <td>@member.Email</td>
-                    <td>@member.Mobile</td>
-                    <td>@member.DateJoined.ToShortDateString()</td>
-                    <td><a asp-action="Edit" asp-route-MemberId=@member.MemberId class="btn btn-primary">Edit</a></td>
-                    <td>Button to view active checkouts</td>
-                    <td><form asp-controller="Members" asp-action="Delete" method="post" asp-route-MemberId=@member.MemberId><button type="submit" class="btn btn-danger btn-sm">Delete</button></form></td>
+                    <td>@MemberWithActiveCheckouts.Member.Name</td>
+                    <td>@MemberWithActiveCheckouts.Member.Email</td>
+                    <td>@MemberWithActiveCheckouts.Member.Mobile</td>
+                    <td>@MemberWithActiveCheckouts.Member.DateJoined.ToShortDateString()</td>
+                    <td><a asp-action="Edit" asp-route-MemberId=@MemberWithActiveCheckouts.Member.MemberId class="btn btn-primary">Edit</a></td>
+                    <td>
+                        @if (MemberWithActiveCheckouts.HasActiveCheckouts) {
+                            
+                         <a asp-controller="ActiveCheckouts" asp-action="MemberCheckouts" asp-route-MemberId=@MemberWithActiveCheckouts.Member.MemberId class="btn btn-primary">View</a>
+  
+                        } else {
+                            <p>No Active Checkouts</p>
+                        }
+
+                    </td>
+                    <td><form asp-controller="Members" asp-action="Delete" method="post" asp-route-MemberId=@MemberWithActiveCheckouts.Member.MemberId><button type="submit" class="btn btn-danger btn-sm">Delete</button></form></td>
                 </tr>
             }
         </tbody> 

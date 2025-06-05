@@ -24,7 +24,12 @@ namespace Bookish.Controllers
         [HttpGet("Index")]
         public IActionResult Index()
         {
-            var members = _context.Members.ToList();
+            var members = _context.Members.Select(member => new MemberWithActiveCheckoutsViewModel //I used select to create an instance of ViewModel Class with 2 properties (ones below)
+            {
+                Member = member, //entire member object (id,name, etc)
+                HasActiveCheckouts = _context.ActiveCheckouts.Any(checkout => checkout.MemberId == member.MemberId) //boolean of if they have checkouts
+            }).ToList(); //put it back in a list (moved it from line 27)
+
             return View(members);
         }
 
@@ -85,10 +90,6 @@ namespace Bookish.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
-
-      
-    
-
 
     }
 }

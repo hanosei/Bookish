@@ -1,0 +1,41 @@
+@model Bookish.ViewModels.MemberWithActiveCheckoutsViewModel;
+
+@{
+    ViewData["Title"] = "Member Checkouts";
+}
+
+<h1>@Model.Member.Name's Checkouts</h1>
+
+<!-- If  Model.ActiveCheckouts.Count > 0 else paragraph No Active checkouts -->
+
+@{ if(Model.ActiveCheckouts.Count > 0) {
+
+<div>
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th>Book Title</th>
+                <th>Book Author</th>
+                <th>Due In Date</th>
+                <th>Return Book</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var checkout in Model.ActiveCheckouts)
+        {
+                <tr>
+                    <td>@checkout.Book.Title</td>
+                    <td>@checkout.Book.Author</td>
+                    <td>@checkout.DueInDate.ToShortDateString()</td>                    
+                    <td><form asp-controller="ActiveCheckouts" asp-action="Delete" method="post" asp-route-MemberId=@checkout.ActiveCheckoutId><button type="submit" class="btn btn-danger btn-sm">Return</button></form></td>
+                </tr>
+            }
+        </tbody> 
+    </table>
+    </div>
+    
+} else {
+    <h2>No current checkouts...</h2>
+}
+}
+    
