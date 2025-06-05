@@ -107,7 +107,7 @@ namespace Bookish.Controllers
 
             _context.ActiveCheckouts.Remove(checkout);
             _context.SaveChanges();
-            return RedirectToAction("MemberCheckouts", new {MemberId = checkout.MemberId});
+            return RedirectToAction("MemberCheckouts", new { MemberId = checkout.MemberId });
         }
 
     }

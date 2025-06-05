@@ -27,7 +27,7 @@
                     <td>@checkout.Book.Title</td>
                     <td>@checkout.Book.Author</td>
                     <td>@checkout.DueInDate.ToShortDateString()</td>                    
-                    <td><form asp-controller="ActiveCheckouts" asp-action="Delete" method="post" asp-route-MemberId=@checkout.ActiveCheckoutId><button type="submit" class="btn btn-danger btn-sm">Return</button></form></td>
+                    <td><form asp-controller="ActiveCheckouts" asp-action="Delete" method="post" asp-route-ActiveCheckoutId=@checkout.ActiveCheckoutId><button type="submit" class="btn btn-danger btn-sm">Return</button></form></td>
                 </tr>
             }
         </tbody> 
